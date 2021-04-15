@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/sideschool/api/homework")
 class HomeWorkController {
 
-    @GetMapping()
+    @GetMapping
     fun getHomeWork(): String {
         return "homework oh yeah"
     }

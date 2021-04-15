@@ -25,10 +25,6 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.register("stage") {
-	dependsOn("build", "clean")
-}
-
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
@@ -39,4 +35,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.register("stage") {
+	dependsOn("build", "clean", "test")
 }

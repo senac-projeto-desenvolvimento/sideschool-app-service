@@ -1,3 +1,5 @@
 package br.com.senac.sideschoolappservice.data
 
-data class QuestionDto(val id: Int, val title: String, val alternatives: List<String>, val rightAnswer: String)
+import br.com.senac.sideschoolappservice.data.entity.HomeworkEntity
+
+data class QuestionDto(val id: Int, var description: String, var homework: HomeworkEntity?)

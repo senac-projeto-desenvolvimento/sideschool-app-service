@@ -20,7 +20,8 @@ services:
     networks:
       - spring-boot-mysql-network
     environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - DB_PASS=${DB_PASS}
+      - DB_URL=${DB_URL}
     depends_on:
       - mysql-service
 networks:

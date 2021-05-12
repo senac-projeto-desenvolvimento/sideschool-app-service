@@ -9,8 +9,8 @@ services:
       - spring-boot-mysql-network
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=senacgrupo1
-      - MYSQL_DATABASE=sideschooldb
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
   web-service:
     build:
       context: ./
@@ -20,7 +20,7 @@ services:
     networks:
       - spring-boot-mysql-network
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/sideschooldb?autoReconnect=true&useSSL=false
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
     depends_on:
       - mysql-service
 networks:

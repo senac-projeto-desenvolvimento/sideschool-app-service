@@ -19,6 +19,7 @@ services:
       - "8089:8089"
     networks:
       - spring-boot-mysql-network
+    restart: always
     environment:
       - DB_PASS=${DB_PASS}
       - DB_URL=${DB_URL}

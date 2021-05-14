@@ -1,8 +1,14 @@
 setup:
   config:
     DB_USER: ${DB_USER}
-    DB_PASS: ${DB_PASS}
-    DB_URL: ${DB_URL}
+    DB_PASS: $(heroku config:get DATABASE_URL -a sideschool-app-service)
+    DATABASE_URL: $(heroku config:get DB_URL -a sideschool-app-service)
 build:
   docker:
     web: Dockerfile
+
+    heroku config:add DATABASE_URL=mysql://senacgrupo1:senacgrupo1@104.41.47.74:3306/sideschooldb
+jdbc:mysql://104:
+  41:
+    47:
+      74:3306/sideschooldb:

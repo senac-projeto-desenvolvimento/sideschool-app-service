@@ -58,11 +58,11 @@ class HomeworkController(val homeworkService: HomeworkService) {
     }
 
     @GetMapping("homework/{homeworkId}/question/{questionId}/alternatives")
-    fun homework(@PathVariable homeworkId: Int, @PathVariable questionId: Int): Homework {
+    fun homework(@PathVariable homeworkId: Int, @PathVariable questionId: Int): HomeworkResponse {
         val homework = homeworkService.loadHomework(homeworkId).get()
         val question = homeworkService.loadQuestion(questionId).get()
         val alternatives = homeworkService.loadAlternatives(question)
 
-        return Homework.of(homework, question, alternatives)
+        return HomeworkResponse.of(homework, question, alternatives)
     }
 }

@@ -1,0 +1,8 @@
+setup:
+  config:
+    DB_USER: ${DB_USER}
+    DB_PASS: ${DB_PASS}
+    DB_URL: ${DB_URL}
+build:
+  docker:
+    web: Dockerfile

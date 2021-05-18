@@ -22,4 +22,9 @@ class SubjectController(@Autowired val service: SubjectService) {
     fun getAllSubjects(): List<SubjectDto> {
         return service.findAll()
     }
+
+//    @GetMapping
+//    fun findAllByClass(): List<SubjectDto> {
+//        return service.findAll()
+//    }
 }

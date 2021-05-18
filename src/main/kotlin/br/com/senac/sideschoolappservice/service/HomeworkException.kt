@@ -10,6 +10,10 @@ abstract class HomeworkException : RuntimeException, MessageSourceResolvable {
     class HomeworkCreationException(message: String) : HomeworkException(message) {
 
         override fun getCodes(): Array<out String> = arrayOf("HomeworkCreationException")
+    }
 
+    class SchoolCreationException(message: String) : HomeworkException(message) {
+
+        override fun getCodes(): Array<out String> = arrayOf("HomeworkCreationException")
     }
 }

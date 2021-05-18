@@ -10,6 +10,7 @@ open class SubjectEntity(@Column(name = "disciplina") open val title: String) {
     @Column(name = "id_disciplina")
     open var subjectId: Int = 0
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
-    open var homeworks : MutableList<HomeworkEntity>  = ArrayList()
+    @ManyToMany(mappedBy = "subjectClasses")
+    open var classes: MutableList<Class>? = null
+
 }

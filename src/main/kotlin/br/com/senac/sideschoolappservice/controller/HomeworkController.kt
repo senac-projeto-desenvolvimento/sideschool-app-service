@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin
 @RestController
 @ComponentScan
 @EnableAutoConfiguration
@@ -57,12 +58,16 @@ class HomeworkController(val homeworkService: HomeworkService) {
         return AlternativeData.of(homeworkService.saveAlternative(body))
     }
 
-    @GetMapping("homework/{homeworkId}/question/{questionId}/alternatives")
-    fun homework(@PathVariable homeworkId: Int, @PathVariable questionId: Int): HomeworkResponse {
+    @GetMapping("homework/{homeworkId}")
+    fun homework(@PathVariable homeworkId: Int): HomeworkResponse {
         val homework = homeworkService.loadHomework(homeworkId).get()
-        val question = homeworkService.loadQuestion(questionId).get()
-        val alternatives = homeworkService.loadAlternatives(question)
+        val questions = homeworkService.loadQuestions(homework)
+        val alternatives = questions.flatMap {
+            homeworkService.loadAlternatives(it)
+        }
 
-        return HomeworkResponse.of(homework, question, alternatives)
+        questions.map { it.alternatives = alternatives }
+
+        return HomeworkResponse.of(homework, questions)
     }
 }

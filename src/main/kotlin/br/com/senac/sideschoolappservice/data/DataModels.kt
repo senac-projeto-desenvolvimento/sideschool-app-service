@@ -17,11 +17,10 @@ data class HomeworkData(val homeworkId: Int?
 
 data class HomeworkResponse(val homeworkId: Int?
                             , val description: String
-                            , val questions: QuestionEntity
-                            , val alternatives: List<AlternativeEntity>) {
+                            , val questions: List<QuestionEntity>) {
 
     companion object {
-        fun of(homework: HomeworkEntity, question: QuestionEntity, alternatives: List<AlternativeEntity>) = HomeworkResponse(homework.homeworkId, homework.description, question, alternatives)
+        fun of(homework: HomeworkEntity, questions: List<QuestionEntity>) = HomeworkResponse(homework.homeworkId, homework.description, questions)
     }
 }
 

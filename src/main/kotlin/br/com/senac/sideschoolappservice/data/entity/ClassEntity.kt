@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity(name = "turma")
-class Class(@Column(name = "nome_turma") var name: String) {
+class ClassEntity(@Column(name = "nome_turma") var name: String) {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_escola", referencedColumnName = "id_escola")
@@ -18,6 +18,9 @@ class Class(@Column(name = "nome_turma") var name: String) {
         inverseJoinColumns = [JoinColumn(name = "id_disciplina")]
     )
     private var subjectClasses: MutableList<SubjectEntity>? = null
+
+    @ManyToMany(mappedBy = "classes")
+    var students: List<Student>? = null
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

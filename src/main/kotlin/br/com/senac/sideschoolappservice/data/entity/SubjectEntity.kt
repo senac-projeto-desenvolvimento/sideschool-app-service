@@ -11,6 +11,6 @@ open class SubjectEntity(@Column(name = "disciplina") open val title: String) {
     open var subjectId: Int = 0
 
     @ManyToMany(mappedBy = "subjectClasses")
-    open var classes: MutableList<Class>? = null
+    open var classes: MutableList<ClassEntity>? = null
 
 }

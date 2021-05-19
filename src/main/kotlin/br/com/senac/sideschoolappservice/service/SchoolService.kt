@@ -1,8 +1,6 @@
 package br.com.senac.sideschoolappservice.service
 
-import br.com.senac.sideschoolappservice.data.ClassDto
 import br.com.senac.sideschoolappservice.data.SchoolDto
-import br.com.senac.sideschoolappservice.data.entity.Class
 import br.com.senac.sideschoolappservice.data.entity.School
 import br.com.senac.sideschoolappservice.repository.SchoolRepository
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,14 +1,12 @@
 package br.com.senac.sideschoolappservice.controller
 
-import br.com.senac.sideschoolappservice.data.ClassData
-import br.com.senac.sideschoolappservice.data.ClassDto
+import br.com.senac.sideschoolappservice.data.*
 import br.com.senac.sideschoolappservice.data.entity.School
 import br.com.senac.sideschoolappservice.service.ClassService
 import br.com.senac.sideschoolappservice.service.SchoolService
+import br.com.senac.sideschoolappservice.service.StudentService
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.ComponentScan
-import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.*
 @ComponentScan
 @EnableAutoConfiguration
 @RequestMapping("/api/sideschool")
-class ClassController(val classService: ClassService, val schoolService: SchoolService) {
+class ClassController(val classService: ClassService, val schoolService: SchoolService, val studentService: StudentService) {
 
     @PostMapping("school/{schoolId}/class")
     fun saveClass(@PathVariable schoolId: Int, @RequestBody body: ClassDto): ClassData {
@@ -32,6 +30,18 @@ class ClassController(val classService: ClassService, val schoolService: SchoolS
         } catch (exception: RuntimeException) {
             return ResponseEntity.notFound().build()
         }
-        return ResponseEntity.ok(classService.findBySchool(school).map { ClassData.of(it) })
+        return ResponseEntity.ok(classService.findAllBySchool(school).map { ClassData.of(it) })
     }
+
+    @GetMapping("school/{schoolId}/class/{classId}")
+    fun findClassesBySchool(@PathVariable schoolId: Int, @PathVariable classId: Int): ResponseEntity<ClassData> {
+        val school: School
+        try {
+            school = schoolService.findById(schoolId)
+        } catch (exception: RuntimeException) {
+            return ResponseEntity.notFound().build()
+        }
+        return ResponseEntity.ok(ClassData.of(classService.findBySchoolAndId(school, classId)))
+    }
+
 }

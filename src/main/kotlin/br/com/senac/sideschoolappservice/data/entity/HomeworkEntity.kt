@@ -1,5 +1,6 @@
 package br.com.senac.sideschoolappservice.data.entity
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.persistence.*
 

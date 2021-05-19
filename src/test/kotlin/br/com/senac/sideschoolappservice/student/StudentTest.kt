@@ -8,13 +8,16 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Bean
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import java.time.LocalDate
@@ -23,7 +26,19 @@ import java.time.LocalDate
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StudentTest {
 
-    //TODO: implementar testes para studentsService
+//    @Mock
+//    lateinit var studentService: StudentService
+//
+//    @Mock
+//    lateinit var classService: StudentService
+//
+//    @Mock
+//    lateinit var studentRepository: StudentRepository
+//
+//    @MockBean
+//    lateinit var student: Student
+//
+//    //TODO: implementar testes para studentsService
 //    @Test
 //    fun saveStudentTest() {
 //        val student = Student("teste1", "54545454", LocalDate.now())

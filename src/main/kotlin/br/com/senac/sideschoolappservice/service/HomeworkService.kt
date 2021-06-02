@@ -1,8 +1,8 @@
 package br.com.senac.sideschoolappservice.service
 
-import br.com.senac.sideschoolappservice.data.AlternativeDto
-import br.com.senac.sideschoolappservice.data.HomeworkDto
-import br.com.senac.sideschoolappservice.data.QuestionDto
+import br.com.senac.sideschoolappservice.data.dto.AlternativeDto
+import br.com.senac.sideschoolappservice.data.dto.HomeworkDto
+import br.com.senac.sideschoolappservice.data.dto.QuestionDto
 import br.com.senac.sideschoolappservice.data.entity.AlternativeEntity
 import br.com.senac.sideschoolappservice.data.entity.HomeworkEntity
 import br.com.senac.sideschoolappservice.data.entity.QuestionEntity

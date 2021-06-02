@@ -1,12 +1,5 @@
 package br.com.senac.sideschoolappservice.data.converter
 
-import br.com.senac.sideschoolappservice.data.AlternativeDto
-import br.com.senac.sideschoolappservice.data.HomeworkDto
-import br.com.senac.sideschoolappservice.data.QuestionDto
-import br.com.senac.sideschoolappservice.data.entity.AlternativeEntity
-import br.com.senac.sideschoolappservice.data.entity.HomeworkEntity
-import br.com.senac.sideschoolappservice.data.entity.QuestionEntity
-import br.com.senac.sideschoolappservice.data.entity.SubjectEntity
 import br.com.senac.sideschoolappservice.repository.SubjectRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

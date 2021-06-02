@@ -1,7 +1,5 @@
 package br.com.senac.sideschoolappservice.data.converter
 
-import br.com.senac.sideschoolappservice.data.QuestionDto
-import br.com.senac.sideschoolappservice.data.entity.QuestionEntity
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 

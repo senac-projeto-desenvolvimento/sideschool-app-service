@@ -1,6 +1,6 @@
 package br.com.senac.sideschoolappservice.data.converter
 
-import br.com.senac.sideschoolappservice.data.SubjectDto
+import br.com.senac.sideschoolappservice.data.dto.SubjectDto
 import br.com.senac.sideschoolappservice.data.entity.SubjectEntity
 import org.springframework.stereotype.Component
 

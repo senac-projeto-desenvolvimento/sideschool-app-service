@@ -1,24 +1,8 @@
 package br.com.senac.sideschoolappservice
 
-import br.com.senac.sideschoolappservice.data.AlternativeDto
-import br.com.senac.sideschoolappservice.data.HomeworkDto
-import br.com.senac.sideschoolappservice.data.QuestionDto
-import br.com.senac.sideschoolappservice.data.converter.HomeworkConverter
-import br.com.senac.sideschoolappservice.data.entity.AlternativeEntity
-import br.com.senac.sideschoolappservice.data.entity.HomeworkEntity
-import br.com.senac.sideschoolappservice.data.entity.QuestionEntity
-import br.com.senac.sideschoolappservice.repository.HomeworkRepository
-import br.com.senac.sideschoolappservice.service.HomeworkService
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.mockito.Mockito
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import java.sql.Date
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

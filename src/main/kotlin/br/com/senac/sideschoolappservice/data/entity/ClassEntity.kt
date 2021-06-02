@@ -14,10 +14,10 @@ class ClassEntity(@Column(name = "nome_turma") var name: String) {
     @ManyToMany
     @JoinTable(
         name = "turma_disciplina",
-        joinColumns = [JoinColumn(name = "id_turma")],
-        inverseJoinColumns = [JoinColumn(name = "id_disciplina")]
+        joinColumns = [JoinColumn(name = "turma_id_turma")],
+        inverseJoinColumns = [JoinColumn(name = "disciplina_id_disciplina")]
     )
-    private var subjectClasses: MutableList<SubjectEntity>? = null
+    var subjectClasses: MutableList<SubjectEntity>? = null
 
     @ManyToMany(mappedBy = "classes")
     var students: List<Student>? = null
@@ -30,6 +30,11 @@ class ClassEntity(@Column(name = "nome_turma") var name: String) {
     @Column(name = "data_turma")
     @CreatedDate
     private var createdDate: LocalDateTime? = LocalDateTime.now()
+
+    constructor(name: String, school: School, subjects: MutableList<SubjectEntity>) : this(name) {
+        this.school = school
+        this.subjectClasses = subjects
+    }
 
     constructor(name: String, school: School) : this(name) {
         this.school = school

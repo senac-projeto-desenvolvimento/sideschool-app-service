@@ -1,6 +1,9 @@
 package br.com.senac.sideschoolappservice.controller
 
 import br.com.senac.sideschoolappservice.data.*
+import br.com.senac.sideschoolappservice.data.dto.AlternativeDto
+import br.com.senac.sideschoolappservice.data.dto.HomeworkDto
+import br.com.senac.sideschoolappservice.data.dto.QuestionDto
 import br.com.senac.sideschoolappservice.service.HomeworkService
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.ComponentScan
@@ -56,6 +59,11 @@ class HomeworkController(val homeworkService: HomeworkService) {
         body.question = homeworkService.loadQuestion(questionId).get()
 
         return AlternativeData.of(homeworkService.saveAlternative(body))
+    }
+
+    @PostMapping("homework/result")
+    fun result(@RequestBody homework: HomeworkDto) {
+
     }
 
     @GetMapping("homework/{homeworkId}")

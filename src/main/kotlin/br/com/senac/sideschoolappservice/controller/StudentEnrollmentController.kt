@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.lang.RuntimeException
-import java.net.URI
 
 @RestController
 @ComponentScan
@@ -18,7 +17,7 @@ import java.net.URI
 @RequestMapping("api/sideschool")
 class StudentEnrollmentController(@Autowired val studentService: StudentService) {
 
-    @PostMapping("/student/{studentId}/enroll")
+    @PutMapping("/student/{studentId}/enroll")
     fun enrollStudent(@PathVariable studentId: Int, @RequestBody classesList: List<Int>): ResponseEntity<StudentData> {
         val studentEnroll: StudentData
         try {

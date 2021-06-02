@@ -1,12 +1,7 @@
 package br.com.senac.sideschoolappservice.data
 
 import br.com.senac.sideschoolappservice.data.entity.AlternativeEntity
-import br.com.senac.sideschoolappservice.data.entity.HomeworkEntity
 import br.com.senac.sideschoolappservice.data.entity.QuestionEntity
-import br.com.senac.sideschoolappservice.data.entity.SubjectEntity
-import java.time.LocalDateTime
-
-
 
 class QuestionData(val questionId: Int?
                    , val description: String) {

@@ -1,6 +1,7 @@
 package br.com.senac.sideschoolappservice.controller
 
 import br.com.senac.sideschoolappservice.data.*
+import br.com.senac.sideschoolappservice.data.entity.ClassEntity
 import br.com.senac.sideschoolappservice.data.entity.School
 import br.com.senac.sideschoolappservice.service.ClassService
 import br.com.senac.sideschoolappservice.service.SchoolService
@@ -42,6 +43,17 @@ class ClassController(val classService: ClassService, val schoolService: SchoolS
             return ResponseEntity.notFound().build()
         }
         return ResponseEntity.ok(ClassData.of(classService.findBySchoolAndId(school, classId)))
+    }
+
+    @PutMapping("class/{classId}")
+    fun findClassesBySchool(@PathVariable classId: Int, @RequestBody subjects: List<Int>): ResponseEntity<ClassData> {
+        val classEntity: ClassEntity
+        try {
+            classEntity = classService.enroll(classId, subjects)
+        } catch (exception: RuntimeException) {
+            return ResponseEntity.notFound().build()
+        }
+        return ResponseEntity.ok(ClassData.of(classService.findById(classEntity.classId)))
     }
 
 }

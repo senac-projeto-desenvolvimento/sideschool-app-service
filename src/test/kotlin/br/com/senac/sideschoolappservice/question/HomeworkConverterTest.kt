@@ -1,13 +1,6 @@
 package br.com.senac.sideschoolappservice.question
 
-import br.com.senac.sideschoolappservice.data.AlternativeDto
-import br.com.senac.sideschoolappservice.data.HomeworkDto
-import br.com.senac.sideschoolappservice.data.QuestionDto
-import br.com.senac.sideschoolappservice.data.converter.HomeworkConverter
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 

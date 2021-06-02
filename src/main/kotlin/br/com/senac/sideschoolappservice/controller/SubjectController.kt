@@ -1,6 +1,7 @@
 package br.com.senac.sideschoolappservice.controller
 
-import br.com.senac.sideschoolappservice.data.SubjectDto
+import br.com.senac.sideschoolappservice.data.SubjectData
+import br.com.senac.sideschoolappservice.data.dto.SubjectDto
 import br.com.senac.sideschoolappservice.service.SubjectService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 @ComponentScan
 @EnableAutoConfiguration
 @RequestMapping("api/sideschool/subject")
-class SubjectController(@Autowired val service: SubjectService) {
+class SubjectController(val service: SubjectService) {
 
     @PostMapping
     fun saveSubject(@RequestBody body: SubjectDto): SubjectDto {
@@ -20,12 +21,7 @@ class SubjectController(@Autowired val service: SubjectService) {
     }
 
     @GetMapping
-    fun getAllSubjects(): List<SubjectDto> {
-        return service.findAll()
+    fun getAllSubjects(): List<SubjectData> {
+        return service.findAll().map { SubjectData.of(it) }
     }
-
-//    @GetMapping
-//    fun findAllByClass(): List<SubjectDto> {
-//        return service.findAll()
-//    }
 }

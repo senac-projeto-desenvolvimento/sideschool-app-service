@@ -1,3 +1,3 @@
 FROM mysql:5.7
-COPY script/sideschooldb.sql /docker-entrypoint-initdb.d/
+COPY script/sideschooldbV3.sql /docker-entrypoint-initdb.d/
 

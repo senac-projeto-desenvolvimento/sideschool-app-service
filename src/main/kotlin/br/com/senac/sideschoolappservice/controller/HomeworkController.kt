@@ -75,14 +75,12 @@ class HomeworkController(
     fun result(@RequestHeader studentId: Int) {
 
     }
-
     @GetMapping("homework/home")
     fun getHomeworkByStudent(@RequestHeader studentId: Int): List<HomeworkData> {
         val student = studentService.findById(studentId)
         val classFound = classService.findByStudent(student)
         val subject = subjectService.findAllByClass(classFound)
 
-//        return subject
         return subject.flatMap { sub ->
             homeworkService.loadHomeworks(sub).map { homework -> HomeworkData.of(homework) }
         }

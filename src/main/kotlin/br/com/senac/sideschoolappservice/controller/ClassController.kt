@@ -1,8 +1,9 @@
 package br.com.senac.sideschoolappservice.controller
 
-import br.com.senac.sideschoolappservice.data.*
 import br.com.senac.sideschoolappservice.data.entity.ClassEntity
 import br.com.senac.sideschoolappservice.data.entity.School
+import br.com.senac.sideschoolappservice.data.response.ClassData
+import br.com.senac.sideschoolappservice.data.response.ClassDto
 import br.com.senac.sideschoolappservice.service.ClassService
 import br.com.senac.sideschoolappservice.service.SchoolService
 import br.com.senac.sideschoolappservice.service.StudentService
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*
 @ComponentScan
 @EnableAutoConfiguration
 @RequestMapping("/api/sideschool")
-class ClassController(val classService: ClassService, val schoolService: SchoolService, val studentService: StudentService) {
+class ClassController(val classService: ClassService, val schoolService: SchoolService) {
 
     @PostMapping("school/{schoolId}/class")
     fun saveClass(@PathVariable schoolId: Int, @RequestBody body: ClassDto): ClassData {

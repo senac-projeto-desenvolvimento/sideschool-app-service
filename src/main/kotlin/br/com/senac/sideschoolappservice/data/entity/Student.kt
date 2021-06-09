@@ -25,6 +25,9 @@ class Student(
     )
     var classes: List<ClassEntity>? = null
 
+//    @OneToOne(mappedBy = "student")
+//    var chosenAlternative: AlternativeEntity? = null
+
     constructor(name: String, document: String, birthdate: String, classes: List<ClassEntity>) : this(name, document, LocalDate.parse(birthdate)){
         this.birthdate = LocalDate.parse(birthdate)
         this.classes = classes

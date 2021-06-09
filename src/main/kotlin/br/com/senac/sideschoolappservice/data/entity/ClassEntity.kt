@@ -11,13 +11,16 @@ class ClassEntity(@Column(name = "nome_turma") var name: String) {
     @JoinColumn(name = "id_escola", referencedColumnName = "id_escola")
     private var school: School? = null
 
+//    @ManyToMany(mappedBy = "classes")
+//    var subjects: MutableList<SubjectEntity> = ArrayList()
+
     @ManyToMany
     @JoinTable(
         name = "turma_disciplina",
         joinColumns = [JoinColumn(name = "turma_id_turma")],
         inverseJoinColumns = [JoinColumn(name = "disciplina_id_disciplina")]
     )
-    var subjectClasses: MutableList<SubjectEntity>? = null
+    var subjects: MutableList<SubjectEntity> = ArrayList()
 
     @ManyToMany(mappedBy = "classes")
     var students: List<Student>? = null
@@ -33,7 +36,7 @@ class ClassEntity(@Column(name = "nome_turma") var name: String) {
 
     constructor(name: String, school: School, subjects: MutableList<SubjectEntity>) : this(name) {
         this.school = school
-        this.subjectClasses = subjects
+        this.subjects = subjects
     }
 
     constructor(name: String, school: School) : this(name) {

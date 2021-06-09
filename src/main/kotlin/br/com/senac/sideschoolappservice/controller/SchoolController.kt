@@ -1,8 +1,7 @@
 package br.com.senac.sideschoolappservice.controller
 
-import br.com.senac.sideschoolappservice.data.SchoolData
-import br.com.senac.sideschoolappservice.data.SchoolDto
-import br.com.senac.sideschoolappservice.data.entity.School
+import br.com.senac.sideschoolappservice.data.response.SchoolData
+import br.com.senac.sideschoolappservice.data.response.SchoolDto
 import br.com.senac.sideschoolappservice.service.SchoolService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration

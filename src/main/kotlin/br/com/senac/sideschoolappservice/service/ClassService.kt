@@ -1,6 +1,6 @@
 package br.com.senac.sideschoolappservice.service
 
-import br.com.senac.sideschoolappservice.data.ClassDto
+import br.com.senac.sideschoolappservice.data.response.ClassDto
 import br.com.senac.sideschoolappservice.data.entity.ClassEntity
 import br.com.senac.sideschoolappservice.data.entity.School
 import br.com.senac.sideschoolappservice.data.entity.Student
@@ -9,7 +9,7 @@ import br.com.senac.sideschoolappservice.repository.StudentRepository
 import org.springframework.stereotype.Service
 
 @Service
-class ClassService(private val classRepository: ClassRepository, private val studentRepository: StudentRepository, private val subjectService: SubjectService) {
+class ClassService(private val classRepository: ClassRepository, private val subjectService: SubjectService) {
 
     fun convertDto(classDto: ClassDto): ClassEntity = ClassEntity(classDto.name, classDto.school ?: throw HomeworkException.HomeworkCreationException("Class doesn't exist"))
 
@@ -26,7 +26,7 @@ class ClassService(private val classRepository: ClassRepository, private val stu
 
     fun enroll(classId: Int, subjects: List<Int>): ClassEntity {
         val classFound = findById(classId)
-        classFound.subjectClasses = subjects.map { id -> subjectService.findById(id) }.toMutableList()
+        classFound.subjects = subjects.map { id -> subjectService.findById(id) }.toMutableList()
 
         return classRepository.save(classFound)
     }

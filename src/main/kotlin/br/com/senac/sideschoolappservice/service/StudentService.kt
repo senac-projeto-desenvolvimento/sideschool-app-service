@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class StudentService(@Autowired val studentRepository: StudentRepository, @Autowired val classService: ClassService) {
+class StudentService(val studentRepository: StudentRepository, val classService: ClassService) {
 
     fun findAllByClass(classEntity: ClassEntity): MutableList<Student> = studentRepository.findByClasses(classEntity)
     fun findById(id: Int): Student = studentRepository.findById(id).get()

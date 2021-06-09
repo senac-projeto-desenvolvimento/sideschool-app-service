@@ -1,4 +1,4 @@
-package br.com.senac.sideschoolappservice.data
+package br.com.senac.sideschoolappservice.data.response
 
 import br.com.senac.sideschoolappservice.data.entity.Student
 

@@ -1,6 +1,6 @@
 package br.com.senac.sideschoolappservice.controller
 
-import br.com.senac.sideschoolappservice.data.StudentData
+import br.com.senac.sideschoolappservice.data.response.StudentData
 import br.com.senac.sideschoolappservice.data.entity.Student
 import br.com.senac.sideschoolappservice.service.ClassService
 import br.com.senac.sideschoolappservice.service.StudentService

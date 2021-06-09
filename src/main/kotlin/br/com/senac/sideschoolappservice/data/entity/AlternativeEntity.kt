@@ -12,7 +12,16 @@ data class AlternativeEntity(
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_pergunta", referencedColumnName = "id_pergunta")
-    private var question: QuestionEntity? = null
+    var question: QuestionEntity? = null
+
+    @OneToOne
+    @PrimaryKeyJoinColumn(name = "id_pergunta")
+    @JoinTable(
+        name = "aluno_resposta",
+        joinColumns = [JoinColumn(name = "resposta_id_resposta")],
+        inverseJoinColumns = [JoinColumn(name = "aluno_id_aluno")]
+    )
+    var student: Student? = null
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

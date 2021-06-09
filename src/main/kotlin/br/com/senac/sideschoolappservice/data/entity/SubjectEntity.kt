@@ -10,7 +10,15 @@ open class SubjectEntity(@Column(name = "disciplina") open val title: String) {
     @Column(name = "id_disciplina")
     open var subjectId: Int = 0
 
-    @ManyToMany(mappedBy = "subjectClasses")
-    open var classes: List<ClassEntity>? = null
+    @ManyToMany(mappedBy = "subjects")
+    open var classes: List<ClassEntity> = ArrayList()
+
+//    @ManyToMany
+//    @JoinTable(
+//        name = "turma_disciplina",
+//        joinColumns = [JoinColumn(name = "disciplina_id_disciplina")],
+//        inverseJoinColumns = [JoinColumn(name = "turma_id_turma")]
+//    )
+//    var classes: MutableList<ClassEntity> = ArrayList()
 
 }

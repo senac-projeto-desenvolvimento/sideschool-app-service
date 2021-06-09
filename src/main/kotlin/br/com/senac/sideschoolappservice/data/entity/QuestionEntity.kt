@@ -14,7 +14,7 @@ data class QuestionEntity(@Column(name = "enunciado") var description: String) {
     @JoinColumn(name = "id_atividade", referencedColumnName = "id_atividade")
     private var homework: HomeworkEntity? = null
 
-    @OneToMany(mappedBy = "question", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "question")
     var alternatives : List<AlternativeEntity> = ArrayList()
 
     constructor(description: String, homework: HomeworkEntity) : this(description) {

@@ -3,23 +3,18 @@ package br.com.senac.sideschoolappservice.service
 import br.com.senac.sideschoolappservice.data.dto.AlternativeDto
 import br.com.senac.sideschoolappservice.data.dto.HomeworkDto
 import br.com.senac.sideschoolappservice.data.dto.QuestionDto
-import br.com.senac.sideschoolappservice.data.entity.AlternativeEntity
-import br.com.senac.sideschoolappservice.data.entity.HomeworkEntity
-import br.com.senac.sideschoolappservice.data.entity.QuestionEntity
-import br.com.senac.sideschoolappservice.data.entity.SubjectEntity
-import br.com.senac.sideschoolappservice.repository.AlternativeRepository
-import br.com.senac.sideschoolappservice.repository.HomeworkRepository
-import br.com.senac.sideschoolappservice.repository.QuestionRepository
-import br.com.senac.sideschoolappservice.repository.SubjectRepository
+import br.com.senac.sideschoolappservice.data.entity.*
+import br.com.senac.sideschoolappservice.repository.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class HomeworkService(
-    @Autowired private val homeworkRepository: HomeworkRepository,
-    @Autowired private val subjectRepository: SubjectRepository,
-    @Autowired private val questionRepository: QuestionRepository,
-    @Autowired private val alternativeRepository: AlternativeRepository) {
+    private val homeworkRepository: HomeworkRepository,
+    private val subjectRepository: SubjectRepository,
+    private val questionRepository: QuestionRepository,
+    private val alternativeRepository: AlternativeRepository,
+    private val studentAlternativeRepository: StudentAlternativeRepository) {
 
     fun convertDto(homework: HomeworkDto): HomeworkEntity = HomeworkEntity(homework.description,
         homework.subject ?: throw HomeworkException.HomeworkCreationException("Subject doesn't exist"))
@@ -39,11 +34,12 @@ class HomeworkService(
     fun loadQuestion(questionId: Int) = questionRepository.findById(questionId)
 
     fun loadAlternatives(question: QuestionEntity) = alternativeRepository.findByQuestion(question)
+    fun findAlternativeById(alternativeId: Int) = alternativeRepository.findById(alternativeId)
 
 
     fun saveHomework(homework: HomeworkDto) = homeworkRepository.save(convertDto(homework))
     fun saveQuestion(question: QuestionDto) = questionRepository.save(convertQuestionDto(question))
     fun saveAlternative(alternative: AlternativeDto) = alternativeRepository.save(convertAlternativeDto(alternative))
-
+    fun submitHomework(alternative: AlternativeEntity) = studentAlternativeRepository.submitHomework(alternative)
 
 }

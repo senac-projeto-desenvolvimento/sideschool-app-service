@@ -16,5 +16,5 @@ interface ClassRepository : JpaRepository<ClassEntity, Int> {
 
     fun findAllByStudents(student: Student): MutableList<ClassEntity>
 
-    fun findBySubjectClasses(subject: SubjectEntity): MutableList<ClassEntity>
+    fun findBySubjects(subject: SubjectEntity): MutableList<ClassEntity>
 }

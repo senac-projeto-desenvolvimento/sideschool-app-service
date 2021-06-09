@@ -1,4 +1,4 @@
-package br.com.senac.sideschoolappservice.data
+package br.com.senac.sideschoolappservice.data.response
 
 import br.com.senac.sideschoolappservice.data.entity.HomeworkEntity
 import br.com.senac.sideschoolappservice.data.entity.QuestionEntity
@@ -14,9 +14,10 @@ data class HomeworkData(val homeworkId: Int?
 
 data class HomeworkResponse(val homeworkId: Int?
                             , val description: String
-                            , val questions: List<QuestionEntity>) {
+                            , val questions: List<QuestionData>) {
 
     companion object {
-        fun of(homework: HomeworkEntity, questions: List<QuestionEntity>) = HomeworkResponse(homework.homeworkId, homework.description, questions)
+        fun of(homework: HomeworkEntity, questions: List<QuestionEntity>) = HomeworkResponse(homework.homeworkId, homework.description,
+            questions.map { QuestionData.of(it) })
     }
 }

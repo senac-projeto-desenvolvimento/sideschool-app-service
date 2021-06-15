@@ -36,10 +36,10 @@ class HomeworkService(
     fun loadAlternatives(question: QuestionEntity) = alternativeRepository.findByQuestion(question)
     fun findAlternativeById(alternativeId: Int) = alternativeRepository.findById(alternativeId)
 
-
     fun saveHomework(homework: HomeworkDto) = homeworkRepository.save(convertDto(homework))
     fun saveQuestion(question: QuestionDto) = questionRepository.save(convertQuestionDto(question))
     fun saveAlternative(alternative: AlternativeDto) = alternativeRepository.save(convertAlternativeDto(alternative))
-    fun submitHomework(alternative: AlternativeEntity) = studentAlternativeRepository.submitHomework(alternative)
-
+    fun submitHomework(alternatives: List<AlternativeEntity>)  {
+        alternatives.forEach { alternative -> studentAlternativeRepository.submitHomework(alternative) }
+    }
 }

@@ -4,8 +4,10 @@ import br.com.senac.sideschoolappservice.data.dto.AlternativeDto
 import br.com.senac.sideschoolappservice.data.dto.HomeworkDto
 import br.com.senac.sideschoolappservice.data.dto.QuestionDto
 import br.com.senac.sideschoolappservice.data.dto.SubmitHomeworkDto
+import br.com.senac.sideschoolappservice.data.entity.AlternativeEntity
 import br.com.senac.sideschoolappservice.data.entity.ClassEntity
 import br.com.senac.sideschoolappservice.data.entity.Student
+import br.com.senac.sideschoolappservice.data.entity.StudentPoints
 import br.com.senac.sideschoolappservice.data.response.*
 import br.com.senac.sideschoolappservice.service.ClassService
 import br.com.senac.sideschoolappservice.service.HomeworkService
@@ -71,10 +73,23 @@ class HomeworkController(
         return AlternativeData.of(homeworkService.saveAlternative(body))
     }
 
-    @PostMapping("homework/result")
-    fun result(@RequestHeader studentId: Int) {
+    @GetMapping("homework/{homeworkId}/result")
+    fun result(@RequestHeader studentId: Int, @PathVariable homeworkId: Int): StudentHomeworkResult {
+        val questions = homeworkService.loadQuestionsByHomeworkId(homeworkId)
+        val rightAnswers: List<AlternativeEntity> = questions
+            .flatMap { homeworkService.loadAlternatives(it) }
+            .filter { it.rightAnswer == 1 }
 
+        val studentAnswers = questions
+            .map { homeworkService.findStudentResult(it.questionId, studentId) }
+            .filter {
+                it.answerId in rightAnswers.map { it.answerId }
+            }
+        val wrongAnswers = questions.size - studentAnswers.size
+
+        return StudentHomeworkResult(studentAnswers.size, wrongAnswers)
     }
+
     @GetMapping("homework/home")
     fun getHomeworkByStudent(@RequestHeader studentId: Int): List<HomeworkData> {
         val student = studentService.findById(studentId)
@@ -90,11 +105,6 @@ class HomeworkController(
     fun homework(@PathVariable homeworkId: Int): HomeworkResponse {
         val homework = homeworkService.loadHomework(homeworkId).get()
         val questions = homeworkService.loadQuestions(homework)
-        val alternatives = questions.flatMap {
-            homeworkService.loadAlternatives(it)
-        }
-
-        questions.map { it.alternatives = alternatives }
 
         return HomeworkResponse.of(homework, questions)
     }
@@ -103,13 +113,13 @@ class HomeworkController(
     fun submitHomework(@PathVariable homeworkId: Int, @RequestBody submit: SubmitHomeworkDto) {
         val homework = homeworkService.loadHomework(homeworkId).get()
         val questions = homeworkService.loadQuestions(homework)
-        val chosenAlternative = questions
-            .flatMap { homeworkService.loadAlternatives(it)
-            .filter { it.answerId == submit.alternativeId } }
-            .first()
+        val alternatives: List<AlternativeEntity> = questions
+            .flatMap { homeworkService.loadAlternatives(it) }
+
+        val chosenAlternatives: List<AlternativeEntity> = alternatives.filter { it.answerId in submit.alternativesId }
 
         val student: Student = studentService.findById(submit.studentId)
-        chosenAlternative.student = student
-        homeworkService.submitHomework(chosenAlternative)
+        chosenAlternatives.map { it.student = student }
+        homeworkService.submitHomework(chosenAlternatives)
     }
 }

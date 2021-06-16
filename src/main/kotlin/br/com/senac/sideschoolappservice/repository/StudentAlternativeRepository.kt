@@ -23,4 +23,5 @@ class StudentAlternativeRepository {
             .setParameter("questionId", alternativeEntity.question?.questionId)
             .executeUpdate()
     }
+
 }

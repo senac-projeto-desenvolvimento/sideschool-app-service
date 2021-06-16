@@ -5,7 +5,6 @@ import br.com.senac.sideschoolappservice.data.dto.HomeworkDto
 import br.com.senac.sideschoolappservice.data.dto.QuestionDto
 import br.com.senac.sideschoolappservice.data.entity.*
 import br.com.senac.sideschoolappservice.repository.*
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,7 +13,8 @@ class HomeworkService(
     private val subjectRepository: SubjectRepository,
     private val questionRepository: QuestionRepository,
     private val alternativeRepository: AlternativeRepository,
-    private val studentAlternativeRepository: StudentAlternativeRepository) {
+    private val studentAlternativeRepository: StudentAlternativeRepository,
+    private val alternativeStudentResultRepository: AlternativeStudentResultRepository) {
 
     fun convertDto(homework: HomeworkDto): HomeworkEntity = HomeworkEntity(homework.description,
         homework.subject ?: throw HomeworkException.HomeworkCreationException("Subject doesn't exist"))
@@ -42,4 +42,16 @@ class HomeworkService(
     fun submitHomework(alternatives: List<AlternativeEntity>)  {
         alternatives.forEach { alternative -> studentAlternativeRepository.submitHomework(alternative) }
     }
+
+    fun loadQuestionsByHomeworkId(homeworkId: Int): List<QuestionEntity> {
+        return loadQuestions(loadHomework(homeworkId).get())
+    }
+
+    fun findStudentResult(questionId: Int, studentId: Int): StudentAlternativeEntity {
+        return alternativeStudentResultRepository.findByQuestionIdAndStudentId(questionId, studentId).first()
+    }
+//
+//    fun findStudentResult(questionId: Int, studentId: Int): StudentAlternativeEntity {
+//        return alternativeStudentResultRepository.findByQuestionId(questionId).first()
+//    }
 }

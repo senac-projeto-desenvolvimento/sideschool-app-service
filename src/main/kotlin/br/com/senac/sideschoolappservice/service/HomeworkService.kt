@@ -48,7 +48,7 @@ class HomeworkService(
     }
 
     fun findStudentResult(questionId: Int, studentId: Int): StudentAlternativeEntity {
-        return alternativeStudentResultRepository.findByQuestionIdAndStudentIdOrderByAnswerDate(questionId, studentId).first()
+        return alternativeStudentResultRepository.findByQuestionIdAndStudentId(questionId, studentId).first()
     }
 //
 //    fun findStudentResult(questionId: Int, studentId: Int): StudentAlternativeEntity {

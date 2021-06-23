@@ -111,17 +111,21 @@ class HomeworkController(
         return HomeworkResponse.of(homework, questions)
     }
 
-    @PostMapping("/homework/{homeworkId}/submit", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping("/homework/{homeworkId}/submit")
     fun submitHomework(@PathVariable homeworkId: Int, @RequestBody submit: SubmitHomeworkDto) {
         val homework = homeworkService.loadHomework(homeworkId).get()
         val questions = homeworkService.loadQuestions(homework)
         val alternatives: List<AlternativeEntity> = questions
             .flatMap { homeworkService.loadAlternatives(it) }
 
-        val chosenAlternatives: List<AlternativeEntity> = alternatives.filter { it.answerId in submit.alternativesId }
+        val chosenAlternatives: List<AlternativeEntity> = alternatives
+            .filter { it.answerId in submit.alternativesId }
+            .distinctBy { Pair(it.answerId, it.question)}
 
         val student: Student = studentService.findById(submit.studentId)
         chosenAlternatives.map { it.student = student }
+
+//         chosenAlternatives.map { AlternativeData.of(it) }
         homeworkService.submitHomework(chosenAlternatives)
     }
 }

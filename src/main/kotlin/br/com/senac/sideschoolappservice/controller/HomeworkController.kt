@@ -15,7 +15,9 @@ import br.com.senac.sideschoolappservice.service.StudentService
 import br.com.senac.sideschoolappservice.service.SubjectService
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.ComponentScan
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
+import java.awt.PageAttributes
 
 @CrossOrigin
 @RestController
@@ -109,7 +111,7 @@ class HomeworkController(
         return HomeworkResponse.of(homework, questions)
     }
 
-    @PostMapping("/homework/{homeworkId}/submit")
+    @PostMapping("/homework/{homeworkId}/submit", consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun submitHomework(@PathVariable homeworkId: Int, @RequestBody submit: SubmitHomeworkDto) {
         val homework = homeworkService.loadHomework(homeworkId).get()
         val questions = homeworkService.loadQuestions(homework)

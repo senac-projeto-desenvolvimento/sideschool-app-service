@@ -9,5 +9,5 @@ interface AlternativeStudentResultRepository : JpaRepository<StudentAlternativeE
 
     fun findByQuestionId(questionId: Int): List<StudentAlternativeEntity>
 
-    fun findByQuestionIdAndStudentId(questionId: Int, studentId: Int): List<StudentAlternativeEntity>
+    fun findByQuestionIdAndStudentIdOrderByAnswerDate(questionId: Int, studentId: Int): List<StudentAlternativeEntity>
 }

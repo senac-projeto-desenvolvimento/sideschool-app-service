@@ -5,9 +5,7 @@ import br.com.senac.sideschoolappservice.data.dto.HomeworkDto
 import br.com.senac.sideschoolappservice.data.dto.QuestionDto
 import br.com.senac.sideschoolappservice.data.dto.SubmitHomeworkDto
 import br.com.senac.sideschoolappservice.data.entity.AlternativeEntity
-import br.com.senac.sideschoolappservice.data.entity.ClassEntity
 import br.com.senac.sideschoolappservice.data.entity.Student
-import br.com.senac.sideschoolappservice.data.entity.StudentPoints
 import br.com.senac.sideschoolappservice.data.response.*
 import br.com.senac.sideschoolappservice.service.ClassService
 import br.com.senac.sideschoolappservice.service.HomeworkService
@@ -15,9 +13,7 @@ import br.com.senac.sideschoolappservice.service.StudentService
 import br.com.senac.sideschoolappservice.service.SubjectService
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.ComponentScan
-import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
-import java.awt.PageAttributes
 
 @CrossOrigin
 @RestController
@@ -125,7 +121,6 @@ class HomeworkController(
         val student: Student = studentService.findById(submit.studentId)
         chosenAlternatives.map { it.student = student }
 
-//         chosenAlternatives.map { AlternativeData.of(it) }
         homeworkService.submitHomework(chosenAlternatives)
     }
 }

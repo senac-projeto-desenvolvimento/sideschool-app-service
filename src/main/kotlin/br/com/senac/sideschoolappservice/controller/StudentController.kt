@@ -1,8 +1,8 @@
 package br.com.senac.sideschoolappservice.controller
 
-import br.com.senac.sideschoolappservice.data.response.StudentData
 import br.com.senac.sideschoolappservice.data.entity.Student
-import br.com.senac.sideschoolappservice.data.entity.StudentPoints
+import br.com.senac.sideschoolappservice.data.response.StudentData
+import br.com.senac.sideschoolappservice.data.response.StudentRankingData
 import br.com.senac.sideschoolappservice.data.response.StudentStatusPoint
 import br.com.senac.sideschoolappservice.service.ClassService
 import br.com.senac.sideschoolappservice.service.StudentService
@@ -35,5 +35,10 @@ class StudentController(val studentService: StudentService, val classService: Cl
     @GetMapping("/student/status")
     fun findStatusPoint(@RequestHeader studentId: Int): StudentStatusPoint {
         return StudentStatusPoint.of(studentService.findStudentStatus(studentId))
+    }
+
+    @GetMapping("/student/ranking")
+    fun getStudentRanking(): List<StudentRankingData?> {
+        return studentService.getStudentRanking().map { StudentRankingData.of(it) }
     }
 }

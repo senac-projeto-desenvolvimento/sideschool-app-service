@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@CrossOrigin
 @ComponentScan
 @EnableAutoConfiguration
 @RequestMapping("/api/sideschool")

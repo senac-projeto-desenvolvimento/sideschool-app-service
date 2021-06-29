@@ -34,7 +34,7 @@ class StudentController(val studentService: StudentService, val classService: Cl
     }
 
     @GetMapping("/student/status")
-    fun findStatusPoint(@RequestHeader studentId: Int): StudentStatusPoint {
+    fun findStatusPoint(@RequestHeader studentId: Int): StudentStatusPoint? {
         return StudentStatusPoint.of(studentService.findStudentStatus(studentId))
     }
 

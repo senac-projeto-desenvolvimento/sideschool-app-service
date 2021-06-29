@@ -50,8 +50,4 @@ class HomeworkService(
     fun findStudentResult(questionId: Int, studentId: Int): StudentAlternativeEntity {
         return alternativeStudentResultRepository.findByQuestionIdAndStudentId(questionId, studentId).first()
     }
-//
-//    fun findStudentResult(questionId: Int, studentId: Int): StudentAlternativeEntity {
-//        return alternativeStudentResultRepository.findByQuestionId(questionId).first()
-//    }
 }

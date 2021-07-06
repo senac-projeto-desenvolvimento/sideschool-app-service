@@ -104,7 +104,7 @@ class HomeworkController(
         val homework = homeworkService.loadHomework(homeworkId).get()
         val questions = homeworkService.loadQuestions(homework)
 
-        questions.map { it.alternatives = it.alternatives.distinct() }
+        questions.map { it.alternatives = it.alternatives.distinct().sortedBy { answer -> answer.answerId } }
 
         return HomeworkResponse.of(homework, questions)
     }
